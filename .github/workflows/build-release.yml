@@ -25,25 +25,18 @@ jobs:
         run: |
           curl -sL -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
 
-      - name: Setup Android build-tools
-        run: |
-          curl -sL -o /tmp/build-tools.zip https://dl.google.com/android/repository/build-tools_r35.0.0-linux.zip
-          unzip -q /tmp/build-tools.zip -d /tmp/build-tools
-          ls /tmp/build-tools
-
       - name: Build APK
         run: java -jar /tmp/apktool.jar b app -o app-unsigned.apk
 
-      - name: Align APK
+      - name: Align & Sign APK
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
         run: |
-          BT=$(find /tmp/build-tools -name zipalign -type f | head -1)
+          BT=$(find "$ANDROID_HOME/build-tools" -name zipalign -type f | sort | tail -1)
+          SIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort | tail -1)
           "$BT" -f 4 app-unsigned.apk app-aligned.apk
-
-      - name: Sign APK
-        run: |
           source keystore/key.properties
-          BT=$(find /tmp/build-tools -name apksigner -type f | head -1)
-          "$BT" sign \
+          "$SIGNER" sign \
             --ks keystore/fackad-release.keystore \
             --ks-key-alias "${keyAlias}" \
             --ks-pass "pass:${storePassword}" \
