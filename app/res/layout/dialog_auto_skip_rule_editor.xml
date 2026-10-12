@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="20.0dip" android:paddingEnd="20.0dip">
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/auto_skip_rule_id">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/rule_id_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_rule_name">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/rule_name_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_package_name">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/package_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_activity_name">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/activity_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_match_text">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/text_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_match_desc">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/desc_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_match_resource_id">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/resource_id_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_match_class_name">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/class_name_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_exclude_text">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/exclude_text_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_exclude_desc">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/exclude_desc_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_exclude_resource_id">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/exclude_resource_id_input" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_gkd_selector">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/gkd_selector_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minLines="2" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_exclude_gkd_selector">
+            <com.google.android.material.textfield.TextInputEditText android:id="@id/exclude_gkd_selector_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minLines="2" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip">
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/auto_skip_priority" android:layout_weight="1.0">
+                <com.google.android.material.textfield.TextInputEditText android:id="@id/priority_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:inputType="numberSigned" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/auto_skip_cooldown_ms" android:layout_weight="1.0" android:layout_marginStart="8.0dip">
+                <com.google.android.material.textfield.TextInputEditText android:id="@id/cooldown_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip">
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/auto_skip_delay_ms" android:layout_weight="1.0">
+                <com.google.android.material.textfield.TextInputEditText android:id="@id/delay_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/auto_skip_region" android:layout_weight="1.0" android:layout_marginStart="8.0dip">
+                <AutoCompleteTextView android:id="@id/region_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:hint="@string/auto_skip_tap_strategy">
+            <AutoCompleteTextView android:id="@id/tap_strategy_input" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</ScrollView>

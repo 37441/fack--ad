@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.XYHook" parent="@style/Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:colorControlActivated">?colorPrimary</item>
+        <item name="android:statusBarColor">?BackgroundColor</item>
+        <item name="android:navigationBarColor">?BackgroundColor</item>
+        <item name="android:windowLightStatusBar">?isLightTheme</item>
+        <item name="BackgroundColor">#4d000000</item>
+        <item name="colorPrimary">@color/theme</item>
+        <item name="colorSurface">@color/miuix_dark_surface</item>
+        <item name="headerTextColor">@color/text</item>
+        <item name="menuColor">@color/text</item>
+    </style>
+    <style name="Theme.Material3.DayNight.NoActionBar" parent="@style/Theme.Material3.Dark.NoActionBar" />
+</resources>

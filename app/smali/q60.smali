@@ -1,0 +1,11 @@
+.class public interface abstract Lq60;
+.super Ljava/lang/Object;
+.source "r8-map-id-08e105c314c2d39f68310afa176149d66b17afb71f0671b414df67b4141d53f4"
+
+# interfaces
+.implements Lp60;
+
+
+# virtual methods
+.method public abstract d(Landroid/view/View;IIIII[I)V
+.end method

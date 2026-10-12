@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="37" android:compileSdkVersionCodename="17" package="com.hujiayucc.hook" platformBuildVersionCode="37" platformBuildVersionName="17">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="moe.shizuku.manager.permission.API_V23"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+        </intent>
+    </queries>
+    <permission android:name="com.hujiayucc.hook.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.hujiayucc.hook.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:description="@string/description" android:enableOnBackInvokedCallback="true" android:extractNativeLibs="false" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:localeConfig="@xml/locales" android:name="com.hujiayucc.hook.application.XYApplication" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/ic_launcher_round" android:theme="@style/Theme.XYHook">
+        <provider android:authorities="com.hujiayucc.hook.shizuku" android:enabled="true" android:exported="true" android:multiprocess="false" android:name="rikka.shizuku.ShizukuProvider" android:permission="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+        <activity android:configChanges="uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.hujiayucc.hook.ui.activity.MainActivity" android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS"/>
+            </intent-filter>
+        </activity>
+        <activity-alias android:exported="true" android:label="@string/app_name" android:name="com.hujiayucc.hook.ui.activity.Home" android:targetActivity="com.hujiayucc.hook.ui.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity-alias>
+        <activity android:exported="false" android:name="com.hujiayucc.hook.ui.activity.SDKActivity"/>
+        <activity android:exported="false" android:name="com.hujiayucc.hook.ui.activity.AppInfoActivity"/>
+        <activity android:exported="false" android:label="@string/auto_skip_rules" android:name="com.hujiayucc.hook.ui.activity.AutoSkipRulesActivity" android:process=":autoskip"/>
+        <activity android:exported="false" android:label="@string/auto_skip_app_switches" android:name="com.hujiayucc.hook.ui.activity.AutoSkipAppListActivity" android:process=":autoskip"/>
+        <service android:exported="true" android:foregroundServiceType="specialUse" android:name="com.hujiayucc.hook.autoskip.AutoSkipAccessibilityService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:process=":autoskip">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="Accessibility event monitoring and automatic UI interaction"/>
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/auto_skip_accessibility_service"/>
+        </service>
+        <service android:enabled="false" android:exported="false" android:name="androidx.appcompat.app.AppLocalesMetadataHolderService">
+            <meta-data android:name="autoStoreLocales" android:value="true"/>
+        </service>
+        <provider android:authorities="com.hujiayucc.hook.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="okhttp3.internal.platform.PlatformInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <meta-data android:name="moe.shizuku.client.V3_SUPPORT" android:value="true"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.hujiayucc.hook.XposedService" android:exported="true" android:name="io.github.libxposed.service.XposedProvider"/>
+    </application>
+</manifest>

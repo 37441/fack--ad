@@ -1,0 +1,57 @@
+name: Build Release APK
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # 固定签名：fackad-release.keystore 已入库（keystore/key.properties），
+      # 每次构建读取同一把签名，保证本仓库任意版本之间可覆盖安装、签名一致。
+      # 此 keystore 独立于其它工程（如薪时记账），互不影响。
+      - name: Setup apktool
+        run: |
+          curl -sL -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
+
+      - name: Setup Android build-tools
+        run: |
+          curl -sL -o /tmp/build-tools.zip https://dl.google.com/android/repository/build-tools_r35.0.0-linux.zip
+          unzip -q /tmp/build-tools.zip -d /tmp/build-tools
+          ls /tmp/build-tools
+
+      - name: Build APK
+        run: java -jar /tmp/apktool.jar b app -o app-unsigned.apk
+
+      - name: Align APK
+        run: |
+          BT=$(find /tmp/build-tools -name zipalign -type f | head -1)
+          "$BT" -f 4 app-unsigned.apk app-aligned.apk
+
+      - name: Sign APK
+        run: |
+          source keystore/key.properties
+          BT=$(find /tmp/build-tools -name apksigner -type f | head -1)
+          "$BT" sign \
+            --ks keystore/fackad-release.keystore \
+            --ks-key-alias "${keyAlias}" \
+            --ks-pass "pass:${storePassword}" \
+            --key-pass "pass:${keyPassword}" \
+            --out app-release.apk app-aligned.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: fackad-apk
+          path: app-release.apk

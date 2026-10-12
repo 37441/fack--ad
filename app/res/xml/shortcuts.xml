@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:icon="@mipmap/ic_launcher" android:enabled="true" android:shortcutId="open" android:shortcutShortLabel="@string/open_fuck_ad" android:shortcutLongLabel="@string/open_fuck_ad">
+        <intent android:targetPackage="com.hujiayucc.hook" android:action="android.intent.action.MAIN" android:targetClass="com.hujiayucc.hook.ui.activity.MainActivity" />
+    </shortcut>
+    <shortcut android:icon="@mipmap/ic_launcher" android:enabled="true" android:shortcutId="sdk" android:shortcutShortLabel="@string/sdks" android:shortcutLongLabel="@string/sdks">
+        <intent android:targetPackage="com.hujiayucc.hook" android:action="android.intent.action.VIEW" android:targetClass="com.hujiayucc.hook.ui.activity.SDKActivity" />
+    </shortcut>
+</shortcuts>
