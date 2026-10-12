@@ -26,12 +26,16 @@ jobs:
           curl -sL -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
 
       - name: Build APK
-        run: java -jar /tmp/apktool.jar b app -o app-unsigned.apk
+        # --copy-original 把 original/META-INF/xposed（module.prop/scope.list/java_init.list）
+        # 复制回 APK，否则 LSPosed 无法识别模块
+        run: java -jar /tmp/apktool.jar b app -o app-unsigned.apk --copy-original
 
       - name: Align & Sign APK
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
         run: |
+          # 自检：模块标识必须存在于 APK，否则 LSPosed 识别不了
+          unzip -l app-unsigned.apk | grep -q "META-INF/xposed/module.prop" || { echo "ERROR: xposed module files missing"; exit 1; }
           BT=$(find "$ANDROID_HOME/build-tools" -name zipalign -type f | sort | tail -1)
           SIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort | tail -1)
           "$BT" -f 4 app-unsigned.apk app-aligned.apk
