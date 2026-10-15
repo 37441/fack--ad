@@ -1,0 +1,3 @@
+# 签名密钥（不入库，CI 从 Secrets 注入）
+keystore/
+key.properties

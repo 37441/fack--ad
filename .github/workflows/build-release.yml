@@ -18,9 +18,16 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # 固定签名：fackad-release.keystore 已入库（keystore/key.properties），
-      # 每次构建读取同一把签名，保证本仓库任意版本之间可覆盖安装、签名一致。
+      # 固定签名：keystore 存于仓库 Secrets（KEYSTORE_BASE64），构建时解码还原，
+      # 口令经环境变量注入 apksigner；keystore 与口令均不入库。
       # 此 keystore 独立于其它工程（如薪时记账），互不影响。
+      - name: Restore keystore from secrets
+        run: |
+          mkdir -p keystore
+          echo "$KEYSTORE_B64" | base64 -d > keystore/fackad-release.keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
+
       - name: Setup apktool
         run: |
           curl -sL -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
@@ -33,18 +40,20 @@ jobs:
       - name: Align & Sign APK
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
           # 自检：模块标识必须存在于 APK，否则 LSPosed 识别不了
           unzip -l app-unsigned.apk | grep -q "META-INF/xposed/module.prop" || { echo "ERROR: xposed module files missing"; exit 1; }
           BT=$(find "$ANDROID_HOME/build-tools" -name zipalign -type f | sort | tail -1)
           SIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort | tail -1)
           "$BT" -f 4 app-unsigned.apk app-aligned.apk
-          source keystore/key.properties
           "$SIGNER" sign \
             --ks keystore/fackad-release.keystore \
-            --ks-key-alias "${keyAlias}" \
-            --ks-pass "pass:${storePassword}" \
-            --key-pass "pass:${keyPassword}" \
+            --ks-key-alias "${KEY_ALIAS}" \
+            --ks-pass "pass:${STORE_PASSWORD}" \
+            --key-pass "pass:${KEY_PASSWORD}" \
             --out app-release.apk app-aligned.apk
 
       - name: Upload APK
